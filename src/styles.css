@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* font import with @font-face goes here */
+
+  *:focus-visible {
+    outline: 0.125rem dotted green;
+    outline-offset: 0.125rem;
+  }
+}

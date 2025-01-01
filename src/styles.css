@@ -3,7 +3,11 @@
 @tailwind utilities;
 
 @layer base {
-  /* font import with @font-face goes here */
+  @font-face {
+    font-family: "JetBrains-Mono";
+    font-weight: 100 800;
+    src: url("./assets/fonts/JetBrainsMono-VariableFont_wght.woff2");
+  }
 
   *:focus-visible {
     outline: 0.125rem dotted green;

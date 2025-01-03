@@ -1,24 +1,21 @@
-import React, { useId, type ComponentProps } from "react"
+import { useState, useId, type ComponentProps } from "react"
 
 type SliderProps = {
-  passwordLength: number
-  handleChange: React.Dispatch<React.SetStateAction<number>>
+  defaultValue: number
 } & ComponentProps<"input">
 
-export default function Slider({
-  passwordLength,
-  handleChange,
-  ...props
-}: SliderProps) {
+export default function Slider({ defaultValue, ...props }: SliderProps) {
   const id = useId()
   const sliderId = `${id}-slider`
+
+  const [sliderValue, setSliderValue] = useState<number>(defaultValue)
 
   return (
     <div className="grid gap-3">
       <label htmlFor={sliderId} className="flex items-center justify-between">
         Character Length
         <span aria-hidden className="text-preset-2 text-neon-green">
-          {passwordLength}
+          {sliderValue}
         </span>
       </label>
 
@@ -27,8 +24,8 @@ export default function Slider({
         {...props}
         type="range"
         id={sliderId}
-        value={passwordLength}
-        onChange={(event) => handleChange(Number(event.target.value))}
+        value={sliderValue}
+        onChange={(event) => setSliderValue(Number(event.target.value))}
       />
     </div>
   )

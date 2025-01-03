@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 
 import Slider from "./Slider"
 import Checkbox from "./Checkbox"
@@ -6,39 +6,29 @@ import Button from "./Button"
 import { LiaArrowRightSolid } from "react-icons/lia"
 
 export default function Form() {
+  function generatePassword(event: React.FormEvent<HTMLFormElement>) {
+    const formData = new FormData(event.currentTarget)
+    const passwordLength = formData.get("password-length")
+    const passwordOptions = formData.getAll("password-options")
+
+    console.log({
+      passwordLength: passwordLength,
+      passwordOptions: passwordOptions,
+    })
+  }
+
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    generatePassword(event)
   }
-
-  function handleFormChange(event: React.FormEvent<HTMLFormElement>) {
-    // console.log(event.currentTarget)
-    const formData = new FormData(event.currentTarget)
-    const formDataObject = Object.fromEntries(formData)
-    console.log(formDataObject)
-  }
-
-  // type PasswordOptions = {
-  //   uppercase: boolean
-  //   lowercase: boolean
-  //   numbers: boolean
-  //   symbols: boolean
-  // }
-
-  const [passwordLength, setPasswordLength] = useState<number>(8)
 
   return (
     <form
       className="grid gap-8 bg-dark-grey p-4"
       onSubmit={handleSubmit}
-      onChange={handleFormChange}
+      onChange={generatePassword}
     >
-      <Slider
-        name="password-length"
-        min={8}
-        max={32}
-        passwordLength={passwordLength}
-        handleChange={setPasswordLength}
-      />
+      <Slider name="password-length" min={8} max={32} defaultValue={12} />
 
       <fieldset className="grid gap-4">
         <legend className="sr-only">Password Options</legend>
@@ -46,16 +36,19 @@ export default function Form() {
           label="Include Uppercase Letters"
           value="uppercase"
           name="password-options"
+          defaultChecked={true}
         />
         <Checkbox
           label="Include Lowercase Letters"
           value="lowercase"
           name="password-options"
+          defaultChecked={true}
         />
         <Checkbox
           label="Include Numbers"
           value="numbers"
           name="password-options"
+          defaultChecked={true}
         />
         <Checkbox
           label="Include Symbols"

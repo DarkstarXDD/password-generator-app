@@ -7,8 +7,6 @@ function Checkbox({
   const id = useId()
   const checkboxId = `${id}-checkbox`
 
-  // console.log("Checkbox Re-rendered!")
-
   return (
     <div className="flex items-center gap-5">
       <input

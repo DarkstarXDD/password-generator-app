@@ -1,10 +1,10 @@
-import { useState } from "react"
+// import { useState } from "react"
 
 import CopyButton from "./components/CopyButton"
 import Form from "./components/Form"
 
 export default function App() {
-  const [password, setPassword] = useState("PTx1f5DaFX")
+  // const [password, setPassword] = useState("PTx1f5DaFX")
 
   return (
     <main>
@@ -12,7 +12,7 @@ export default function App() {
         <h1 className="text-3xl text-center text-grey">Password Generator</h1>
 
         <div className="flex items-center justify-between bg-dark-grey p-5">
-          <p className="text-preset-2">{password}</p>
+          <p className="text-preset-2">PTx1f5DaFX</p>
           <CopyButton handleClick={() => console.log("Copy Clicked!")} />
         </div>
 

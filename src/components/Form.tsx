@@ -10,24 +10,30 @@ export default function Form() {
     event.preventDefault()
   }
 
-  type PasswordOptions = {
-    uppercase: boolean
-    lowercase: boolean
-    numbers: boolean
-    symbols: boolean
+  function handleFormChange(event: React.FormEvent<HTMLFormElement>) {
+    // console.log(event.currentTarget)
+    const formData = new FormData(event.currentTarget)
+    const formDataObject = Object.fromEntries(formData)
+    console.log(formDataObject)
   }
 
+  // type PasswordOptions = {
+  //   uppercase: boolean
+  //   lowercase: boolean
+  //   numbers: boolean
+  //   symbols: boolean
+  // }
+
   const [passwordLength, setPasswordLength] = useState<number>(8)
-  const [passwordOptions, setPasswordOptions] = useState<PasswordOptions>({
-    uppercase: false,
-    lowercase: false,
-    numbers: false,
-    symbols: false,
-  })
 
   return (
-    <form className="grid gap-8 bg-dark-grey p-4" onSubmit={handleSubmit}>
+    <form
+      className="grid gap-8 bg-dark-grey p-4"
+      onSubmit={handleSubmit}
+      onChange={handleFormChange}
+    >
       <Slider
+        name="password-length"
         min={8}
         max={32}
         passwordLength={passwordLength}
@@ -36,10 +42,26 @@ export default function Form() {
 
       <fieldset className="grid gap-4">
         <legend className="sr-only">Password Options</legend>
-        <Checkbox label="Include Uppercase Letters" value="uppercase" />
-        <Checkbox label="Include Lowercase Letters" value="lowercase" />
-        <Checkbox label="Include Numbers" value="numbers" />
-        <Checkbox label="Include Symbols" value="symbols" />
+        <Checkbox
+          label="Include Uppercase Letters"
+          value="uppercase"
+          name="password-options"
+        />
+        <Checkbox
+          label="Include Lowercase Letters"
+          value="lowercase"
+          name="password-options"
+        />
+        <Checkbox
+          label="Include Numbers"
+          value="numbers"
+          name="password-options"
+        />
+        <Checkbox
+          label="Include Symbols"
+          value="symbols"
+          name="password-options"
+        />
       </fieldset>
 
       <Button>

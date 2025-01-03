@@ -2,8 +2,6 @@ import React, { useId, type ComponentProps } from "react"
 
 function Checkbox({
   label,
-  isChecked,
-  handleChange,
   ...props
 }: { label: string } & ComponentProps<"input">) {
   const id = useId()
@@ -17,8 +15,6 @@ function Checkbox({
         type="checkbox"
         id={checkboxId}
         {...props}
-        checked={isChecked}
-        onChange={(event) => handleChange(event.target.checked)}
         className="cursor-pointer"
       />
       <label htmlFor={checkboxId}>{label}</label>

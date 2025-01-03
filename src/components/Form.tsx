@@ -10,7 +10,20 @@ export default function Form() {
     event.preventDefault()
   }
 
+  type PasswordOptions = {
+    uppercase: boolean
+    lowercase: boolean
+    numbers: boolean
+    symbols: boolean
+  }
+
   const [passwordLength, setPasswordLength] = useState<number>(8)
+  const [passwordOptions, setPasswordOptions] = useState<PasswordOptions>({
+    uppercase: false,
+    lowercase: false,
+    numbers: false,
+    symbols: false,
+  })
 
   return (
     <form className="grid gap-8 bg-dark-grey p-4" onSubmit={handleSubmit}>

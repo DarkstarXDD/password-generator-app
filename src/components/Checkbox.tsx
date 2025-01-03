@@ -1,11 +1,13 @@
-import { useId, type ComponentProps } from "react"
+import React, { useId, type ComponentProps } from "react"
 
-export default function Checkbox({
+function Checkbox({
   label,
   ...props
 }: { label: string } & ComponentProps<"input">) {
   const id = useId()
   const checkboxId = `${id}-checkbox`
+
+  console.log("Checkbox Re-rendered!")
 
   return (
     <div className="flex items-center gap-5">
@@ -19,3 +21,5 @@ export default function Checkbox({
     </div>
   )
 }
+
+export default React.memo(Checkbox)

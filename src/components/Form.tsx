@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 
 import Slider from "./Slider"
 import Checkbox from "./Checkbox"
@@ -10,9 +10,16 @@ export default function Form() {
     event.preventDefault()
   }
 
+  const [passwordLength, setPasswordLength] = useState<number>(8)
+
   return (
     <form className="grid gap-8 bg-dark-grey p-4" onSubmit={handleSubmit}>
-      <Slider defaultValue={12} min={8} max={32} />
+      <Slider
+        min={8}
+        max={32}
+        passwordLength={passwordLength}
+        handleChange={setPasswordLength}
+      />
 
       <fieldset className="grid gap-4">
         <legend className="sr-only">Password Options</legend>

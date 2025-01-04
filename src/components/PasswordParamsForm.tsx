@@ -1,9 +1,7 @@
-import { memo } from "react"
-
 import Slider from "./Slider"
 import Checkbox from "./Checkbox"
 import Button from "./Button"
-import { LiaArrowRightSolid } from "react-icons/lia"
+import { MdOutlineRefresh } from "react-icons/md"
 
 type PasswordParams = { length: number; options: string[] }
 
@@ -63,11 +61,11 @@ function PasswordParamsForm({
       </fieldset>
 
       <Button>
-        Generate
-        <LiaArrowRightSolid strokeWidth={2} />
+        Regenerate
+        <MdOutlineRefresh fontSize="1.5rem" />
       </Button>
     </form>
   )
 }
 
-export default memo(PasswordParamsForm)
+export default PasswordParamsForm

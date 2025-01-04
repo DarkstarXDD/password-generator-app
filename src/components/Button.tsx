@@ -1,4 +1,5 @@
 import { ReactNode, type ComponentProps } from "react"
+import clsx from "clsx"
 
 export default function Button({
   children,
@@ -8,11 +9,13 @@ export default function Button({
   children?: ReactNode
   className?: string
 } & ComponentProps<"button">) {
+  const classes = clsx(
+    "flex w-full items-center justify-center gap-4 bg-neon-green p-5 text-dark-grey transition-all hover:bg-green-hover",
+    className
+  )
+
   return (
-    <button
-      className={`flex w-full items-center justify-center gap-6 border-2 border-neon-green bg-neon-green p-5 text-dark-grey transition-all hover:bg-dark-grey hover:text-neon-green ${className}`}
-      {...props}
-    >
+    <button className={classes} {...props}>
       {children}
     </button>
   )

@@ -2,12 +2,12 @@ import { useState } from "react"
 import { FaRegCopy } from "react-icons/fa"
 import { GiCheckMark } from "react-icons/gi"
 
-function CopyButton({ password }: { password: string }) {
+function CopyButton({ valueToCopy }: { valueToCopy: string }) {
   const [isCopied, setIsCopied] = useState(false)
 
   async function handleClick() {
     try {
-      await navigator.clipboard.writeText(password)
+      await navigator.clipboard.writeText(valueToCopy)
       setIsCopied(true)
       setTimeout(() => setIsCopied(false), 1500)
     } catch (error) {

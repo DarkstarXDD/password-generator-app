@@ -1,10 +1,10 @@
-import React from "react"
+import React, { memo } from "react"
 import { FaRegCopy } from "react-icons/fa"
 
-export default function CopyButton({
+function CopyButton({
   handleClick,
 }: {
-  handleClick: React.MouseEventHandler<HTMLButtonElement>
+  handleClick?: React.MouseEventHandler<HTMLButtonElement>
 }) {
   return (
     <button className="text-neon-green" onClick={handleClick}>
@@ -12,3 +12,5 @@ export default function CopyButton({
     </button>
   )
 }
+
+export default memo(CopyButton)

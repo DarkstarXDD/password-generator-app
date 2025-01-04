@@ -1,4 +1,4 @@
-import React from "react"
+import React, { memo } from "react"
 
 import Slider from "./Slider"
 import Checkbox from "./Checkbox"
@@ -42,19 +42,26 @@ function generatePassword(length: number, options: string[]): string {
   return password
 }
 
-export default function Form() {
+function Form({
+  setPassword,
+}: {
+  setPassword: React.Dispatch<React.SetStateAction<string>>
+}) {
   function handleChange(event: React.FormEvent<HTMLFormElement>) {
     const formData = new FormData(event.currentTarget)
     const passwordLength = Number(formData.get("password-length"))
     const passwordOptions = formData.getAll("password-options") as string[]
 
-    console.log(generatePassword(passwordLength, passwordOptions))
+    const newPassword = generatePassword(passwordLength, passwordOptions)
+    setPassword(newPassword)
   }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     handleChange(event)
   }
+
+  console.log("Form rendered!")
 
   return (
     <form
@@ -98,3 +105,5 @@ export default function Form() {
     </form>
   )
 }
+
+export default memo(Form)

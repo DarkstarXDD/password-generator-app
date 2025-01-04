@@ -2,17 +2,16 @@ import { useState, useId, type ComponentProps } from "react"
 
 type SliderProps = {
   defaultValue: number
-} & ComponentProps<"input">
+} & Omit<ComponentProps<"input">, "type" | "id" | "value" | "onChange">
 
 export default function Slider({ defaultValue, ...props }: SliderProps) {
   const id = useId()
-  const sliderId = `${id}-slider`
 
   const [sliderValue, setSliderValue] = useState<number>(defaultValue)
 
   return (
     <div className="grid gap-3">
-      <label htmlFor={sliderId} className="flex items-center justify-between">
+      <label htmlFor={id} className="flex items-center justify-between">
         Character Length
         <span aria-hidden className="text-preset-2 text-neon-green">
           {sliderValue}
@@ -23,7 +22,7 @@ export default function Slider({ defaultValue, ...props }: SliderProps) {
         className="h-2 cursor-pointer appearance-none bg-very-dark-grey"
         {...props}
         type="range"
-        id={sliderId}
+        id={id}
         value={sliderValue}
         onChange={(event) => setSliderValue(Number(event.target.value))}
       />

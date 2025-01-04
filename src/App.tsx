@@ -13,7 +13,7 @@ export default function App() {
 
         <div className="flex items-center justify-between bg-dark-grey p-5">
           <p className="text-preset-2">{password}</p>
-          <CopyButton handleClick={() => console.log("Copy Clicked!")} />
+          <CopyButton password={password} />
         </div>
 
         <Form setPassword={setPassword} />

@@ -1,5 +1,6 @@
 import Slider from "./Slider"
 import Checkbox from "./Checkbox"
+import Strength from "./Strength"
 import Button from "./Button"
 import { MdOutlineRefresh } from "react-icons/md"
 
@@ -59,6 +60,8 @@ function PasswordParamsForm({
           name="password-options"
         />
       </fieldset>
+
+      <Strength value={3} />
 
       <Button>
         Regenerate

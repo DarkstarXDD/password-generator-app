@@ -74,7 +74,7 @@ function PasswordParamsForm({
         />
       </fieldset>
 
-      <Strength value={passwordParams.options.length} />
+      <Strength value={passwordParams.length} />
 
       <Button>
         Regenerate

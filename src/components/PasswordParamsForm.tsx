@@ -1,69 +1,101 @@
+import React, { useState } from "react"
 import Slider from "./Slider"
 import Checkbox from "./Checkbox"
 import Strength from "./Strength"
 import Button from "./Button"
 import { MdOutlineRefresh } from "react-icons/md"
 
-type PasswordParams = { length: number; options: string[] }
+type PasswordParams = {
+  length: number
+  options: {
+    uppercase: boolean
+    lowercase: boolean
+    numbers: boolean
+    symbols: boolean
+  }
+}
 
 function PasswordParamsForm({
-  onChange,
-  onSubmit,
+  updatePassword,
+  defaultPasswordParams,
 }: {
-  onChange: (passwordParams: PasswordParams) => void
-  onSubmit: typeof onChange
+  updatePassword: (passwordParams: PasswordParams) => void
+  defaultPasswordParams: PasswordParams
 }) {
-  function getPasswordParams(formData: FormData): PasswordParams {
-    const length = Number(formData.get("password-length"))
-    const options = formData.getAll("password-options") as string[]
-    return { length, options }
+  const [passwordParams, setPasswordParams] = useState<PasswordParams>(
+    defaultPasswordParams
+  )
+
+  function onCheckboxChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const newParams: PasswordParams = {
+      ...passwordParams,
+      options: {
+        ...passwordParams.options,
+        [event.target.value]: event.target.checked,
+      },
+    }
+    setPasswordParams(newParams)
+    updatePassword(newParams)
   }
 
-  // function calcPasswordStrengthValue(options: PasswordParams["options"]) {
-  //   return options.length
-  // }
+  function onSliderChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const newParams = {
+      ...passwordParams,
+      [event.target.name]: Number(event.target.value),
+    }
+    setPasswordParams(newParams)
+    updatePassword(newParams)
+  }
 
   return (
     <form
       className="grid gap-8 bg-dark-grey p-4"
-      onChange={(event) =>
-        onChange(getPasswordParams(new FormData(event.currentTarget)))
-      }
       onSubmit={(event) => {
         event.preventDefault()
-        onSubmit(getPasswordParams(new FormData(event.currentTarget)))
+        updatePassword(passwordParams)
       }}
     >
-      <Slider name="password-length" min={8} max={32} defaultValue={12} />
+      <Slider
+        name="length"
+        min={8}
+        max={32}
+        value={passwordParams.length}
+        onChange={onSliderChange}
+      />
 
       <fieldset className="grid gap-4">
         <legend className="sr-only">Password Options</legend>
         <Checkbox
           label="Include Uppercase Letters"
           value="uppercase"
-          name="password-options"
-          defaultChecked={true}
+          name="options"
+          checked={passwordParams.options.uppercase}
+          onChange={onCheckboxChange}
         />
         <Checkbox
           label="Include Lowercase Letters"
           value="lowercase"
-          name="password-options"
-          defaultChecked={true}
+          name="options"
+          checked={passwordParams.options.lowercase}
+          onChange={onCheckboxChange}
         />
         <Checkbox
           label="Include Numbers"
           value="numbers"
-          name="password-options"
-          defaultChecked={true}
+          name="options"
+          checked={passwordParams.options.numbers}
+          onChange={onCheckboxChange}
         />
         <Checkbox
           label="Include Symbols"
           value="symbols"
-          name="password-options"
+          name="options"
+          checked={passwordParams.options.symbols}
+          onChange={onCheckboxChange}
         />
       </fieldset>
 
-      <Strength value={1} />
+      <Strength value={passwordParams.length} />
 
       <Button>
         Regenerate

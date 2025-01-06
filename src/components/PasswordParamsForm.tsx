@@ -19,7 +19,9 @@ function PasswordParamsForm({
     return { length, options }
   }
 
-  console.log("Form rendered!")
+  // function calcPasswordStrengthValue(options: PasswordParams["options"]) {
+  //   return options.length
+  // }
 
   return (
     <form
@@ -61,7 +63,7 @@ function PasswordParamsForm({
         />
       </fieldset>
 
-      <Strength value={3} />
+      <Strength value={1} />
 
       <Button>
         Regenerate

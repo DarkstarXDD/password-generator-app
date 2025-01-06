@@ -5,6 +5,11 @@ import PasswordParamsForm from "./components/PasswordParamsForm"
 
 type PasswordParams = { length: number; options: string[] }
 
+const defaultPasswordParams: PasswordParams = {
+  length: 12,
+  options: ["uppercase", "lowercase", "numbers"],
+}
+
 function generatePassword({ length, options }: PasswordParams): string {
   let password = ""
 
@@ -43,7 +48,9 @@ function generatePassword({ length, options }: PasswordParams): string {
 }
 
 export default function App() {
-  const [password, setPassword] = useState("PTx1f5DaFX")
+  const [password, setPassword] = useState(() =>
+    generatePassword(defaultPasswordParams)
+  )
 
   function updatePassword(passwordParams: PasswordParams) {
     setPassword(generatePassword(passwordParams))
@@ -60,8 +67,8 @@ export default function App() {
         </div>
 
         <PasswordParamsForm
-          onChange={updatePassword}
-          onSubmit={updatePassword}
+          updatePassword={updatePassword}
+          defaultPasswordParams={defaultPasswordParams}
         />
       </div>
     </main>

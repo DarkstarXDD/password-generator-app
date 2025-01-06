@@ -3,7 +3,7 @@ import { useState } from "react"
 import CopyButton from "./components/CopyButton"
 import PasswordParamsForm from "./components/PasswordParamsForm"
 
-type PasswordParams = {
+export type PasswordParams = {
   length: number
   options: {
     uppercase: boolean

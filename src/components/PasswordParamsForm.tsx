@@ -4,16 +4,7 @@ import Checkbox from "./Checkbox"
 import Strength from "./Strength"
 import Button from "./Button"
 import { MdOutlineRefresh } from "react-icons/md"
-
-type PasswordParams = {
-  length: number
-  options: {
-    uppercase: boolean
-    lowercase: boolean
-    numbers: boolean
-    symbols: boolean
-  }
-}
+import { type PasswordParams } from "../App"
 
 function PasswordParamsForm({
   updatePassword,

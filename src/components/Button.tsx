@@ -10,7 +10,7 @@ export default function Button({
   className?: string
 } & ComponentProps<"button">) {
   const classes = clsx(
-    "flex w-full items-center justify-center gap-4 bg-neon-green p-5 text-dark-grey transition-all hover:bg-green-hover",
+    "flex w-full items-center justify-center gap-4 bg-neon-green p-5 text-dark-grey transition-colors hover:bg-green-hover",
     className
   )
 

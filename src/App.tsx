@@ -3,11 +3,24 @@ import { useState } from "react"
 import CopyButton from "./components/CopyButton"
 import PasswordParamsForm from "./components/PasswordParamsForm"
 
-type PasswordParams = { length: number; options: string[] }
+type PasswordParams = {
+  length: number
+  options: {
+    uppercase: boolean
+    lowercase: boolean
+    numbers: boolean
+    symbols: boolean
+  }
+}
 
 const defaultPasswordParams: PasswordParams = {
   length: 12,
-  options: ["uppercase", "lowercase", "numbers"],
+  options: {
+    uppercase: true,
+    lowercase: true,
+    numbers: true,
+    symbols: false,
+  },
 }
 
 function generatePassword({ length, options }: PasswordParams): string {
@@ -22,19 +35,19 @@ function generatePassword({ length, options }: PasswordParams): string {
 
   let availableChars = ""
 
-  if (options.includes("uppercase")) {
+  if (options.uppercase) {
     availableChars += charGroups.uppercase
   }
 
-  if (options.includes("lowercase")) {
+  if (options.lowercase) {
     availableChars += charGroups.lowercase
   }
 
-  if (options.includes("numbers")) {
+  if (options.numbers) {
     availableChars += charGroups.numbers
   }
 
-  if (options.includes("symbols")) {
+  if (options.symbols) {
     availableChars += charGroups.symbols
   }
 

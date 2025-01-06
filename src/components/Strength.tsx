@@ -5,7 +5,7 @@ export default function Strength({ value }: { value: number }) {
   let strengthColor = ""
   let strengthIndex: number
 
-  if (value < 8) {
+  if (value <= 8) {
     strengthIndex = 1
     strengthText = "Too Weak!"
     strengthColor = "bg-red border-red"

@@ -1,11 +1,19 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import Slider from "./Slider"
 import Checkbox from "./Checkbox"
 import Strength from "./Strength"
 import Button from "./Button"
 import { MdOutlineRefresh } from "react-icons/md"
 
-type PasswordParams = { length: number; options: string[] }
+type PasswordParams = {
+  length: number
+  options: {
+    uppercase: boolean
+    lowercase: boolean
+    numbers: boolean
+    symbols: boolean
+  }
+}
 
 function PasswordParamsForm({
   updatePassword,
@@ -18,32 +26,41 @@ function PasswordParamsForm({
     defaultPasswordParams
   )
 
-  function getPasswordParams(formData: FormData): PasswordParams {
-    const length = Number(formData.get("password-length"))
-    const options = formData.getAll("password-options") as string[]
-    return { length, options }
+  function onCheckboxChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const newParams: PasswordParams = {
+      ...passwordParams,
+      options: {
+        ...passwordParams.options,
+        [event.target.value]: event.target.checked,
+      },
+    }
+    setPasswordParams(newParams)
+    updatePassword(newParams)
   }
 
-  function handleFormChange(formData: FormData) {
-    const params = getPasswordParams(formData)
-    setPasswordParams(params)
-    updatePassword(params)
+  function onSliderChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const newParams = {
+      ...passwordParams,
+      [event.target.name]: Number(event.target.value),
+    }
+    setPasswordParams(newParams)
+    updatePassword(newParams)
   }
 
   return (
     <form
       className="grid gap-8 bg-dark-grey p-4"
-      onChange={(event) => handleFormChange(new FormData(event.currentTarget))}
       onSubmit={(event) => {
         event.preventDefault()
-        handleFormChange(new FormData(event.currentTarget))
+        updatePassword(passwordParams)
       }}
     >
       <Slider
-        name="password-length"
+        name="length"
         min={8}
         max={32}
-        defaultValue={defaultPasswordParams.length}
+        value={passwordParams.length}
+        onChange={onSliderChange}
       />
 
       <fieldset className="grid gap-4">
@@ -51,26 +68,30 @@ function PasswordParamsForm({
         <Checkbox
           label="Include Uppercase Letters"
           value="uppercase"
-          name="password-options"
-          defaultChecked={defaultPasswordParams.options.includes("uppercase")}
+          name="options"
+          checked={passwordParams.options.uppercase}
+          onChange={onCheckboxChange}
         />
         <Checkbox
           label="Include Lowercase Letters"
           value="lowercase"
-          name="password-options"
-          defaultChecked={defaultPasswordParams.options.includes("lowercase")}
+          name="options"
+          checked={passwordParams.options.lowercase}
+          onChange={onCheckboxChange}
         />
         <Checkbox
           label="Include Numbers"
           value="numbers"
-          name="password-options"
-          defaultChecked={defaultPasswordParams.options.includes("number")}
+          name="options"
+          checked={passwordParams.options.numbers}
+          onChange={onCheckboxChange}
         />
         <Checkbox
           label="Include Symbols"
           value="symbols"
-          name="password-options"
-          defaultChecked={defaultPasswordParams.options.includes("symbols")}
+          name="options"
+          checked={passwordParams.options.symbols}
+          onChange={onCheckboxChange}
         />
       </fieldset>
 

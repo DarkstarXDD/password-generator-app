@@ -17,6 +17,15 @@ function PasswordParamsForm({
     defaultPasswordParams
   )
 
+  function onSliderChange(value: number[]) {
+    const newParams = {
+      ...passwordParams,
+      length: value[0],
+    }
+    setPasswordParams(newParams)
+    updatePassword(newParams)
+  }
+
   function onCheckboxChange(event: React.ChangeEvent<HTMLInputElement>) {
     const newParams: PasswordParams = {
       ...passwordParams,
@@ -25,14 +34,8 @@ function PasswordParamsForm({
         [event.target.value]: event.target.checked,
       },
     }
-    setPasswordParams(newParams)
-    updatePassword(newParams)
-  }
-
-  function onSliderChange(value: number[]) {
-    const newParams = {
-      ...passwordParams,
-      length: value[0],
+    if (!Object.values(newParams.options).includes(true)) {
+      return
     }
     setPasswordParams(newParams)
     updatePassword(newParams)

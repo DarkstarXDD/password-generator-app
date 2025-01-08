@@ -74,7 +74,7 @@ export default function App() {
       <div className="grid max-w-xl gap-4">
         <h1 className="text-3xl text-center text-grey">Password Generator</h1>
 
-        <div className="flex items-center justify-between bg-dark-grey p-5">
+        <div className="flex items-center justify-between gap-3 bg-dark-grey p-5">
           <p className="text-preset-2">{password}</p>
           <CopyButton valueToCopy={password} />
         </div>

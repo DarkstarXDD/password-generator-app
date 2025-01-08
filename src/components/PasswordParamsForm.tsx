@@ -29,10 +29,10 @@ function PasswordParamsForm({
     updatePassword(newParams)
   }
 
-  function onSliderChange(event: React.ChangeEvent<HTMLInputElement>) {
+  function onSliderChange(value: number[]) {
     const newParams = {
       ...passwordParams,
-      [event.target.name]: Number(event.target.value),
+      length: value[0],
     }
     setPasswordParams(newParams)
     updatePassword(newParams)
@@ -51,7 +51,7 @@ function PasswordParamsForm({
         min={8}
         max={32}
         value={passwordParams.length}
-        onChange={onSliderChange}
+        onValueChange={onSliderChange}
       />
 
       <fieldset className="grid gap-4">

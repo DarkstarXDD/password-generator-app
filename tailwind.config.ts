@@ -4,7 +4,7 @@ export default {
   content: ["./index.html", "./src/**/*"],
   theme: {
     screens: {
-      md: "58rem",
+      md: "48rem",
     },
 
     fontFamily: {
@@ -45,6 +45,7 @@ export default {
       "almost-white": "hsl(252, 11%, 91%)",
       "neon-green": "hsl(127, 100%, 82%)",
       "green-hover": "hsl(127, 58%, 74%)",
+      "green-ring": "hsl(125, 27%, 65%)",
       yellow: "hsl(42, 91%, 68%)",
       orange: "hsl(13, 95%, 66%)",
       red: "hsl(0, 91%, 63%)",

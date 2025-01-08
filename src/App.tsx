@@ -71,12 +71,18 @@ export default function App() {
 
   return (
     <main>
-      <div className="grid max-w-xl gap-4">
-        <h1 className="text-3xl text-center text-grey">Password Generator</h1>
+      <div className="mx-auto grid max-w-xl gap-6">
+        <div className="grid gap-8">
+          <h1 className="text-center text-preset-2 text-grey">
+            Password Generator
+          </h1>
 
-        <div className="flex items-center justify-between gap-3 bg-dark-grey p-5">
-          <p className="break-all text-preset-2">{password}</p>
-          <CopyButton valueToCopy={password} />
+          <div className="flex items-center justify-between gap-3 bg-dark-grey p-5 md:px-8 md:py-6">
+            <p className="break-all text-preset-2 md:text-preset-1">
+              {password}
+            </p>
+            <CopyButton valueToCopy={password} />
+          </div>
         </div>
 
         <PasswordParamsForm

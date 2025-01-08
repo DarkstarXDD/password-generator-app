@@ -40,7 +40,7 @@ function PasswordParamsForm({
 
   return (
     <form
-      className="grid gap-8 bg-dark-grey p-4"
+      className="grid gap-8 bg-dark-grey p-4 md:p-8"
       onSubmit={(event) => {
         event.preventDefault()
         updatePassword(passwordParams)

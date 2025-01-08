@@ -10,7 +10,7 @@
   }
 
   *:focus-visible {
-    outline: 0.15rem dotted white;
+    outline: 0.125rem solid hsl(125, 27%, 65%);
     outline-offset: 0.125rem;
   }
 }
